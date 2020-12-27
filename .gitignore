@@ -1,0 +1,4 @@
+config.json
+*.zip
+__pycach*
+tests.py

@@ -1,0 +1,28 @@
+{
+    "USER_TOKEN": "0zErVB7BdheCEdi9zJLzEi9mBZg",
+    "DB_NAME": "discordDB",
+    "DB_TABLE_NAME": "Messages",
+    "DB_USERNAME": "root",
+    "DB_PASSWORD": "uni",
+    "MYSQL_SERVER_ADDRESS": "localhost",
+    "OUTPUT_CHANNEL_WEBHOOK": "https://discord.com/api/YgODsMEkPMhKm_qzTPPNxeYR-jTPHU9dYX_XbhtGy2cwV2Lr9I-N4KSSO6CVSStkjtwo",
+    "SERVERS": {
+        "virchual's server": [
+            "general",
+            "hacking"
+        ],
+        "hacking_server": [
+            "Channel1",
+            "channel2"
+        ],
+        "another server name": [
+            "channel of another server",
+            "another channel of the server"
+        ]
+    },
+    "KEYWORDS": [
+        "Linux",
+        "Hacking",
+        "Windows"
+    ]
+}
