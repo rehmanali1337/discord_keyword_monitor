@@ -68,8 +68,6 @@ messages = 0
 @client.event
 async def on_message(message):
     global messages
-    messages += 1
-    print(f'Messages : {messages}')
     guildsList = config.get("SERVERS").keys()
     guild = message.guild.name
     channel = message.channel.name
