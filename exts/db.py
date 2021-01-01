@@ -1,4 +1,3 @@
-from pymongo import MongoClient
 import asyncio
 import mysql.connector as connector
 import queue
