@@ -3,6 +3,8 @@ import discord
 import json
 import aiohttp
 from queue import Queue
+import threading
+from exts.db import DB
 
 client = discord.Client()
 dbQueue = Queue()
@@ -92,5 +94,8 @@ async def sendToTarget(message):
         webhook = Webhook.from_url(
             config.get("OUTPUT_CHANNEL_WEBHOOK"), adapter=AsyncWebhookAdapter(session))
         await webhook.send(embed=embed, username='Discord Monitor')
+
+db = DB(dbQueue)
+threading.Thread(target=db.start).start()
 
 client.run(config.get("USER_TOKEN"), bot=False)
