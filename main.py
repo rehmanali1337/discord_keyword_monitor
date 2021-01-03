@@ -104,7 +104,7 @@ async def sendToTarget(message):
             config.get("OUTPUT_CHANNEL_WEBHOOK"), adapter=AsyncWebhookAdapter(session))
         await webhook.send(embed=embed, username='Discord Monitor')
 
-# db = DB(dbQueue)
-# threading.Thread(target=db.start).start()
+db = DB(dbQueue)
+threading.Thread(target=db.start).start()
 
 client.run(config.get("USER_TOKEN"), bot=False)
