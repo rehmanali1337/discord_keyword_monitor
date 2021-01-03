@@ -4,6 +4,7 @@ import json
 import aiohttp
 from queue import Queue
 import threading
+import re
 from exts.db import DB
 
 client = discord.Client()
@@ -62,15 +63,25 @@ async def valid(text):
         return True
     return False
 
-messages = 0
+
+def deEmojify(text):
+    regrex_pattern = re.compile(pattern="["
+                                u"\U0001F600-\U0001F64F"  # emoticons
+                                u"\U0001F300-\U0001F5FF"  # symbols & pictographs
+                                u"\U0001F680-\U0001F6FF"  # transport & map symbols
+                                u"\U0001F1E0-\U0001F1FF"  # flags (iOS)
+                                "]+", flags=re.UNICODE)
+    return regrex_pattern.sub(r'', text)
 
 
 @client.event
 async def on_message(message):
-    global messages
-    guildsList = config.get("SERVERS").keys()
-    guild = message.guild.name
-    channel = message.channel.name
+    guildsList = list(config.get("SERVERS").keys())
+    guild = deEmojify(message.guild.name.strip())
+    guild = guild.strip()
+    channel = deEmojify(message.channel.name.strip())
+    channel = channel.strip()
+    print(f'{guild} --> {channel}')
     if guild in guildsList:
         print('Valid Server')
         channels = config.get("SERVERS").get(guild)
@@ -93,7 +104,7 @@ async def sendToTarget(message):
             config.get("OUTPUT_CHANNEL_WEBHOOK"), adapter=AsyncWebhookAdapter(session))
         await webhook.send(embed=embed, username='Discord Monitor')
 
-db = DB(dbQueue)
-threading.Thread(target=db.start).start()
+# db = DB(dbQueue)
+# threading.Thread(target=db.start).start()
 
 client.run(config.get("USER_TOKEN"), bot=False)
